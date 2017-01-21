@@ -6,6 +6,7 @@ cd "$(dirname "$0")"
 #includes
 . ./colors.sh
 . ./arguments.sh
+. ./cluster.sh
 
 #database details
 database_host=127.0.0.1
