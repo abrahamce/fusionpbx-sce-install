@@ -70,6 +70,17 @@ if [ $node_type = 'master' ]; then
 	psql --host=$database_host --port=$database_port --username=$database_username -c "insert into v_group_users (group_user_uuid, domain_uuid, group_name, group_uuid, user_uuid) values('$group_user_uuid', '$domain_uuid', '$group_name', '$group_uuid', '$user_uuid');"
 fi
 
+#add bdr extensions and create group
+sudo -u postgres psql fusionpbx -c "CREATE EXTENSION bdr";
+sudo -u postgres psql freeswitch -c "CREATE EXTENSION bdr";
+if [ $node_type = 'master' ]; then
+        sudo -u postgres psql fusionpbx -c "SELECT bdr.bdr_group_create(local_node_name := 'node1_fusionpbx', node_external_dsn := 'host=$master_ip port=5432 dbname=fusionpbx');"
+        sudo -u postgres psql freeswitch -c "SELECT bdr.bdr_group_create(local_node_name := 'node1_freeswitch', node_external_dsn := 'host=$master_ip port=5432 dbname=freeswitch');"
+elif [ $node_type = 'slave' ]; then
+        sudo -u postgres psql fusionpbx -c "SELECT bdr.bdr_group_join(local_node_name := 'node2_fusionpbx', node_external_dsn := 'host=$slave_ip port=5432 dbname=fusionpbx', join_using_dsn := 'host=$master_ip port=5432 dbname=fusionpbx');"
+        sudo -u postgres psql freeswitch -c "SELECT bdr.bdr_group_join(local_node_name := 'node2_freeswitch', node_external_dsn := 'host=$slave_ip port=5432 dbname=freeswitch', join_using_dsn := 'host=$master_ip port=5432 dbname=freeswitch');"
+fi
+
 #update xml_cdr url, user and password
 xml_cdr_username=$(dd if=/dev/urandom bs=1 count=12 2>/dev/null | base64 | sed 's/[=\+//]//g')
 xml_cdr_password=$(dd if=/dev/urandom bs=1 count=12 2>/dev/null | base64 | sed 's/[=\+//]//g')
