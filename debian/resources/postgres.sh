@@ -30,6 +30,9 @@ apt-get install -y --force-yes sudo postgresql-bdr-9.4 postgresql-bdr-9.4-bdr-pl
 systemctl daemon-reload
 systemctl restart postgresql
 
+cp postgresql.conf /etc/postgresql/9.4/main/postgresql.conf
+chown postgres:postgres /etc/postgresql/9.4/main/postgresql.conf
+
 #init.d
 #/usr/sbin/service postgresql restart
 
