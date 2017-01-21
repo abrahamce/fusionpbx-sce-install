@@ -11,7 +11,7 @@ cd "$(dirname "$0")"
 database_host=127.0.0.1
 database_port=5432
 database_username=fusionpbx
-database_password=$(dd if=/dev/urandom bs=1 count=20 2>/dev/null | base64 | sed 's/[=\+//]//g')
+#database_password=$(dd if=/dev/urandom bs=1 count=20 2>/dev/null | base64 | sed 's/[=\+//]//g')
 
 #allow the script to use the new password
 export PGPASSWORD=$database_password
@@ -28,7 +28,9 @@ sed -i /etc/fusionpbx/config.php -e s:'{database_username}:fusionpbx:'
 sed -i /etc/fusionpbx/config.php -e s:"{database_password}:$database_password:"
 
 #add the database schema
-cd /var/www/fusionpbx && php /var/www/fusionpbx/core/upgrade/upgrade_schema.php > /dev/null 2>&1
+if [ $node_type = 'master' ]; then
+	cd /var/www/fusionpbx && php /var/www/fusionpbx/core/upgrade/upgrade_schema.php > /dev/null 2>&1
+fi
 
 #get the server hostname
 #domain_name=$(hostname -f)
@@ -40,7 +42,9 @@ domain_name=$(hostname -I | cut -d ' ' -f1)
 domain_uuid=$(/usr/bin/php /var/www/fusionpbx/resources/uuid.php);
 
 #add the domain name
-psql --host=$database_host --port=$database_port --username=$database_username -c "insert into v_domains (domain_uuid, domain_name, domain_enabled) values('$domain_uuid', '$domain_name', 'true');"
+if [ $node_type = 'master' ]; then
+	psql --host=$database_host --port=$database_port --username=$database_username -c "insert into v_domains (domain_uuid, domain_name, domain_enabled) values('$domain_uuid', '$domain_name', 'true');"
+fi
 
 #app defaults
 cd /var/www/fusionpbx && php /var/www/fusionpbx/core/upgrade/upgrade_domains.php
@@ -51,8 +55,9 @@ user_salt=$(/usr/bin/php /var/www/fusionpbx/resources/uuid.php);
 user_name=admin
 user_password=$(dd if=/dev/urandom bs=1 count=12 2>/dev/null | base64 | sed 's/[=\+//]//g')
 password_hash=$(php -r "echo md5('$user_salt$user_password');");
-psql --host=$database_host --port=$database_port --username=$database_username -t -c "insert into v_users (user_uuid, domain_uuid, username, password, salt, user_enabled) values('$user_uuid', '$domain_uuid', '$user_name', '$password_hash', '$user_salt', 'true');"
-
+if [ $node_type = 'master' ]; then
+	psql --host=$database_host --port=$database_port --username=$database_username -t -c "insert into v_users (user_uuid, domain_uuid, username, password, salt, user_enabled) values('$user_uuid', '$domain_uuid', '$user_name', '$password_hash', '$user_salt', 'true');"
+fi
 #get the superadmin group_uuid
 group_uuid=$(psql --host=$database_host --port=$database_port --username=$database_username -t -c "select group_uuid from v_groups where group_name = 'superadmin';");
 group_uuid=$(echo $group_uuid | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//')
@@ -60,7 +65,9 @@ group_uuid=$(echo $group_uuid | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//')
 #add the user to the group
 group_user_uuid=$(/usr/bin/php /var/www/fusionpbx/resources/uuid.php);
 group_name=superadmin
-psql --host=$database_host --port=$database_port --username=$database_username -c "insert into v_group_users (group_user_uuid, domain_uuid, group_name, group_uuid, user_uuid) values('$group_user_uuid', '$domain_uuid', '$group_name', '$group_uuid', '$user_uuid');"
+if [ $node_type = 'master' ]; then
+	psql --host=$database_host --port=$database_port --username=$database_username -c "insert into v_group_users (group_user_uuid, domain_uuid, group_name, group_uuid, user_uuid) values('$group_user_uuid', '$domain_uuid', '$group_name', '$group_uuid', '$user_uuid');"
+fi
 
 #update xml_cdr url, user and password
 xml_cdr_username=$(dd if=/dev/urandom bs=1 count=12 2>/dev/null | base64 | sed 's/[=\+//]//g')
@@ -103,6 +110,3 @@ echo "      https://fusionpbx.com/support.php"
 echo "      https://www.fusionpbx.com"
 echo "      http://docs.fusionpbx.com"
 echo ""
-
-
-
