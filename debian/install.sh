@@ -1,5 +1,12 @@
 #!/bin/sh
 
+########## Edit these values to suit ##########
+export master_ip='192.168.1.116'
+export slave_ip='192.168.1.117'
+# node_type must be either 'master' or 'slave'
+export node_type='master'
+###############################################
+
 #move to script directory so all relative paths work
 cd "$(dirname "$0")"
 

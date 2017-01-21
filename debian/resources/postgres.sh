@@ -36,6 +36,26 @@ systemctl restart postgresql
 #init.d
 #/usr/sbin/service postgresql restart
 
+cat <<EOF > /etc/postgresql/9.4/main/pg_hba.conf
+# Database administrative login by Unix domain socket
+local   all             postgres                                peer
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+# "local" is for Unix domain socket connections only
+local   all             all                                     peer
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            trust
+hostssl all             all             $master_ip/32   trust
+hostssl all             all             $slave_ip/32    trust
+# IPv6 local connections:
+host    all             all             ::1/128                 md5
+# Allow replication connections from localhost, by a user with the
+# replication privilege.
+hostssl   replication   postgres        $master_ip/32           trust
+hostssl   replication   postgres        $slave_ip/32            trust
+EOF
+
+systemctl restart postgresql
+
 #move to /tmp to prevent a red herring error when running sudo with psql
 cwd=$(pwd)
 cd /tmp
@@ -54,6 +74,13 @@ sudo -u postgres psql freeswitch -c "CREATE EXTENSION btree_gist";
 sudo -u postgres psql freeswitch -c "CREATE EXTENSION bdr";
 sudo -u postgres psql freeswitch -c "CREATE EXTENSION pgcrypto";
 sudo -u postgres psql freeswitch < /usr/src/fusionpbx-sce-install/debian/resources/freeswitch.sql;
+if [ $node_type = 'master' ]; then
+	sudo -u postgres psql fusionpbx -c "SELECT bdr.bdr_group_create(local_node_name := 'node1_fusionpbx', node_external_dsn := 'host=$master_ip port=5432 dbname=fusionpbx');"
+	sudo -u postgres psql freeswitch -c "SELECT bdr.bdr_group_create(local_node_name := 'node1_freeswitch', node_external_dsn := 'host=$master_ip port=5432 dbname=freeswitch');"
+elif [ $node_type = 'slave' ]; then
+	sudo -u postgres psql fusionpbx -c "SELECT bdr.bdr_group_join(local_node_name := 'node2_fusionpbx', node_external_dsn := 'host=$slave_ip port=5432 dbname=fusionpbx', join_using_dsn := 'host=$master_ip port=5432 dbname=fusionpbx');"
+	sudo -u postgres psql freeswitch -c "SELECT bdr.bdr_group_join(local_node_name := 'node2_freeswitch', node_external_dsn := 'host=$slave_ip port=5432 dbname=freeswitch', join_using_dsn := 'host=$master_ip port=5432 dbname=fusionpbx');"
+fi
 #ALTER USER fusionpbx WITH PASSWORD 'newpassword';
 cd $cwd
 

@@ -1,6 +1,7 @@
 CREATE TABLE json_store (
 	name varchar(255) not null,
-	data text
+	data text,
+	json_store_uuid uuid PRIMARY KEY default gen_random_uuid()
 	);
 
 ALTER TABLE json_store OWNER TO fusionpbx;
