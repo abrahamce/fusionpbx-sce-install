@@ -26,12 +26,12 @@ echo 'deb http://packages.2ndquadrant.com/bdr/apt/ jessie-2ndquadrant main' >> /
 apt-get update && apt-get upgrade -y
 apt-get install -y --force-yes sudo postgresql-bdr-9.4 postgresql-bdr-9.4-bdr-plugin postgresql-bdr-contrib-9.4
 
+cp postgresql.conf /etc/postgresql/9.4/main/postgresql.conf
+chown postgres:postgres /etc/postgresql/9.4/main/postgresql.conf
+
 #systemd
 systemctl daemon-reload
 systemctl restart postgresql
-
-cp postgresql.conf /etc/postgresql/9.4/main/postgresql.conf
-chown postgres:postgres /etc/postgresql/9.4/main/postgresql.conf
 
 #init.d
 #/usr/sbin/service postgresql restart
@@ -47,6 +47,13 @@ sudo -u postgres psql -c "CREATE ROLE freeswitch WITH SUPERUSER LOGIN PASSWORD '
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE fusionpbx to fusionpbx;"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE freeswitch to fusionpbx;"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE freeswitch to freeswitch;"
+sudo -u postgres psql fusionpbx -c "CREATE EXTENSION btree_gist";
+sudo -u postgres psql fusionpbx -c "CREATE EXTENSION bdr";
+sudo -u postgres psql fusionpbx -c "CREATE EXTENSION pgcrypto";
+sudo -u postgres psql freeswitch -c "CREATE EXTENSION btree_gist";
+sudo -u postgres psql freeswitch -c "CREATE EXTENSION bdr";
+sudo -u postgres psql freeswitch -c "CREATE EXTENSION pgcrypto";
+sudo -u postgres psql freeswitch < /usr/src/fusionpbx-sce-install/debian/resources/freeswitch.sql;
 #ALTER USER fusionpbx WITH PASSWORD 'newpassword';
 cd $cwd
 
