@@ -97,6 +97,9 @@ else
     sed -i /usr/share/freeswitch/scripts/ha_monitor.lua -e s:"rpc_ip:$master_ip:"
 fi
 
+#Make sure with script perms
+chown -R www-data:www-data /usr/share/freeswitch/scripts
+
 if [ $node_type = 'slave' ]; then
 #Wait for BDR sync to do app defaults
 bdr_synced=$(sudo -u postgres psql -qtA fusionpbx -c "SELECT node_status FROM bdr.bdr_nodes WHERE node_name='node2_fusionpbx'" )
