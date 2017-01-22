@@ -5,7 +5,7 @@ Just change one file and its almost as easy as a regular FusionPBX install
 
 On the SLAVE node do the following
 
-On the slave we need to allow root SSH which is disabled by default on Debian 8. There will be a instructions to disable this at the end if you whish to do so.
+On the slave we need to allow root SSH which is disabled by default on Debian 8. There will be a instructions to disable this at the end if you wish to do so.
 
 ```
 sed -i 's/^PermitRootLogin .*/PermitRootLogin yes/g' /etc/ssh/sshd_config
