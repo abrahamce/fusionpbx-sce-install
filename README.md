@@ -68,4 +68,7 @@ Sort out XML RPC
 
 Turn off auto create schemas
 
+Install Csync2 for file replication
+
+
 
