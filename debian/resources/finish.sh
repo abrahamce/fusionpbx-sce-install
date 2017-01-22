@@ -106,6 +106,7 @@ cd /var/www/fusionpbx && php /var/www/fusionpbx/core/upgrade/upgrade_domains.php
 /bin/systemctl restart freeswitch
 
 #welcome message
+if [ $node_type = 'master' ]; then
 echo ""
 echo ""
 verbose "Installation has completed."
@@ -130,3 +131,10 @@ echo "      https://fusionpbx.com/support.php"
 echo "      https://www.fusionpbx.com"
 echo "      http://docs.fusionpbx.com"
 echo ""
+else
+echo ""
+echo ""
+verbose "Installation has completed."
+echo ""
+echo "   Please obtain credentials from master node."
+fi
