@@ -46,6 +46,14 @@ cd /usr/src/fusionpbx-sce-install/debian
 ./installer.sh
 ```
 
+You will be informed on screen when the installation is completed.
+
+If you wish to disable root password authentication by SSH run the following:
+```
+sed -i 's/^PermitRootLogin yes/PermitRootLogin without-password/g' /etc/ssh/sshd_config
+service ssh restart
+```
+
 For additional information to get started go to http://docs.fusionpbx.com/en/latest/getting_started.html 
 
 
