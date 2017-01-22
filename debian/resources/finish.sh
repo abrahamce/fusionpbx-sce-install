@@ -87,15 +87,16 @@ sed -i /etc/freeswitch/autoload_configs/xml_cdr.conf.xml -e s:"{v_project_path}:
 sed -i /etc/freeswitch/autoload_configs/xml_cdr.conf.xml -e s:"{v_user}:$xml_cdr_username:"
 sed -i /etc/freeswitch/autoload_configs/xml_cdr.conf.xml -e s:"{v_pass}:$xml_cdr_password:"
 
+if [ $node_type = 'slave' ]; then
 #Wait for BDR sync to do app defaults
 bdr_synced=$(sudo -u postgres psql -qtA fusionpbx -c "SELECT node_status FROM bdr.bdr_nodes WHERE node_name='node2_fusionpbx'" )
-echo "A$bdr_syncedA"
-while [ "$bdr_synced" != "l" ]
+while [ "$bdr_synced" != "r" ]
 do
 sleep 5
 bdr_synced=$(sudo -u postgres psql -qtA fusionpbx -c "SELECT node_status FROM bdr.bdr_nodes WHERE node_name='node2_fusionpbx'" )
 echo "   Waiting for BDR sync."
 done
+fi
 
 #app defaults
 cd /var/www/fusionpbx && php /var/www/fusionpbx/core/upgrade/upgrade_domains.php
