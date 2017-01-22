@@ -34,9 +34,9 @@ nano -w resources/cluster.sh
 
 
 
-Change the masterand slave IPs, enter you DB password and do not forget on the slave to set the node_type to slave.
+<p>Change the masterand slave IPs, enter you DB password and do not forget on the slave to set the node_type to slave.</p>
 
-Once that is done run the following:
+<p>Once that is done run the following:</p>
 
 ```
 ./install.sh
