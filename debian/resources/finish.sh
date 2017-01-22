@@ -87,19 +87,6 @@ sed -i /etc/freeswitch/autoload_configs/xml_cdr.conf.xml -e s:"{v_project_path}:
 sed -i /etc/freeswitch/autoload_configs/xml_cdr.conf.xml -e s:"{v_user}:$xml_cdr_username:"
 sed -i /etc/freeswitch/autoload_configs/xml_cdr.conf.xml -e s:"{v_pass}:$xml_cdr_password:"
 
-cp /usr/src/fusionpbx-sce-install/debian/resources/ha_monitor.lua /usr/share/freeswitch/scripts/
-
-sed -i /usr/share/freeswitch/scripts/ha_monitor.lua -e s:"rpc_user:$xml_cdr_username:"
-sed -i /usr/share/freeswitch/scripts/ha_monitor.lua -e s:"rpc_pass:$xml_cdr_password:"
-if [ $node_type = 'master' ]; then
-    sed -i /usr/share/freeswitch/scripts/ha_monitor.lua -e s:"rpc_ip:$slave_ip:"
-else
-    sed -i /usr/share/freeswitch/scripts/ha_monitor.lua -e s:"rpc_ip:$master_ip:"
-fi
-
-#Make sure with script perms
-chown -R www-data:www-data /usr/share/freeswitch/scripts
-
 if [ $node_type = 'slave' ]; then
 #Wait for BDR sync to do app defaults
 bdr_synced=$(sudo -u postgres psql -qtA fusionpbx -c "SELECT node_status FROM bdr.bdr_nodes WHERE node_name='node2_fusionpbx'" )
