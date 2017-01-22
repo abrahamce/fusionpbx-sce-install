@@ -66,4 +66,6 @@ Edit autload_configs
 
 Sort out XML RPC
 
+Turn off auto create schemas
+
 
