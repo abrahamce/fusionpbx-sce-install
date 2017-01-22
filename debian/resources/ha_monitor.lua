@@ -3,9 +3,9 @@
 servers = {}
 servers[#servers + 1] = {
         method   = 'curl';
-        username = "$rpc_user";
-        password = "$rpc_pass";
-        hostname = "$rpc_ip";
+        username = "rpc_user";
+        password = "rpc_pass";
+        hostname = "rpc_ip";
         port     = "8787";
 }
 
