@@ -5,7 +5,7 @@ servers[#servers + 1] = {
         method   = 'curl';
         username = "$rpc_user";
         password = "$rpc_pass";
-        hostname = "127.0.0.1";
+        hostname = "$rpc_ip";
         port     = "8787";
 }
 
