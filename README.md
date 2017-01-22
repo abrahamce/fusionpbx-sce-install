@@ -29,7 +29,7 @@ cd /usr/src/fusionpbx-install.sh/debian
 fusionpbx-sce-install
 --------------------------------------
 
-```bash
+```
 apt-get update && apt-get upgrade -y --force-yes
 apt-get install -y --force-yes git
 cd /usr/src
