@@ -5,7 +5,10 @@ cd "$(dirname "$0")"
 
 . ./colors.sh
 . ./arguments.sh
+. ./cluster.sh
 
+rpc_user=$xml_cdr_username
+rpc_pass=$xml_cdr_password
 #send a message
 verbose "Installing FusionPBX"
 
