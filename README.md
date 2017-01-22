@@ -39,7 +39,7 @@ Run the following and follow the instructions onscreen:
 ./install.sh --masternode
 ```
 
-You will be informed when installation is completed, now return to the SLAVE node and run:
+You will be informed when installation is completed, once that is done, return to the SLAVE node and run:
 
 ```
 cd /usr/src/fusionpbx-sce-install/debian
