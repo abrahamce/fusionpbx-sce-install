@@ -43,7 +43,7 @@ You will be informed when installation is completed, once that is done, return t
 
 ```
 cd /usr/src/fusionpbx-sce-install/debian
-./installer.sh
+./install.sh
 ```
 
 You will be informed on screen when the installation is completed.
