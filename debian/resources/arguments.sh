@@ -3,7 +3,7 @@
 #Process command line options only if we haven't been processed once
 if [ -z "$CPU_CHECK" ]; then
 	export script_name=`basename "$0"`
-	ARGS=$(getopt -n '$script_name' -o h -l help,use-switch-source,use-switch-package-all,use-switch-master,use-switch-package-unofficial-arm,use-system-master,no-cpu-check -- "$@")
+	ARGS=$(getopt -n '$script_name' -o h -l help,use-switch-source,use-switch-package-all,use-switch-master,use-switch-package-unofficial-arm,use-system-master,no-cpu-check,masternode -- "$@")
 	
 	if [ $? -ne 0 ]; then
 		error "Failed parsing options."
@@ -16,6 +16,7 @@ if [ -z "$CPU_CHECK" ]; then
 	export USE_SWITCH_MASTER=false
 	export USE_SYSTEM_MASTER=false
 	export CPU_CHECK=true
+        export node_type='slave'
 	HELP=false
 	
 	while true; do
@@ -25,6 +26,7 @@ if [ -z "$CPU_CHECK" ]; then
 		--use-switch-master ) export USE_SWITCH_MASTER=true; shift ;;
 		--use-system-master ) export USE_SYSTEM_MASTER=true; shift ;;
 		--no-cpu-check ) export CPU_CHECK=false; shift ;;
+                --masternode ) export node_type='master'; shift ;;
 		-h | --help ) HELP=true; shift ;;
 		-- ) shift; break ;;
 		* ) break ;;
