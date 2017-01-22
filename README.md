@@ -40,11 +40,15 @@ cd fusionpbx-sce-install/debian/
 
 Create a database password to use a good example is to execute the following:
 
+```
 dd if=/dev/urandom bs=1 count=20 2>/dev/null | base64 | sed 's/[=\+//]//g'
+```
 
 Edit the cluster.sh file on each server putting the same db password within the file:
 
+```
 nano -w resources/cluster.sh
+```
 
 #!/bin/sh
 ########## Edit these values to suit and copy to second machine. Remember to set second machine to 'slave' ##########
@@ -60,7 +64,9 @@ Change the masterand slave IPs, enter you DB password and do not forget on the s
 
 Once that is done run the following:
 
+```
 ./install.sh
+```
 
 For best results run on the master first and then the slave. This is not strictly necessary but we wnat BDR up and running on the master when we attempt to connect the second.
 
