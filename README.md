@@ -22,7 +22,7 @@ Edit the cluster.sh file on each server putting the same db password within the 
 nano -w resources/cluster.sh
 ```
 
-#!/bin/sh
+<p>#!/bin/sh</p>
 ########## Edit these values to suit and copy to second machine. Remember to set second machine to 'slave' ##########
 export master_ip='192.168.1.116'
 export slave_ip='192.168.1.110'
