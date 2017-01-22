@@ -29,12 +29,14 @@ cd /usr/src/fusionpbx-install.sh/debian
 fusionpbx-sce-install
 --------------------------------------
 
+```bash
 apt-get update && apt-get upgrade -y --force-yes
 apt-get install -y --force-yes git
 cd /usr/src
 git clone http://git.sip247.com/pbx/fusionpbx-sce-install.git
 chmod 755 -R /usr/src/fusionpbx-sce-install
 cd fusionpbx-sce-install/debian/
+```
 
 Create a database password to use a good example is to execute the following:
 
