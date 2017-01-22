@@ -18,6 +18,53 @@ systemctl restart freeswitch
 
 Then go to Status -> SIP Status and start the SIP profiles, after this, go to Advanced -> Modules and find the module Memcached and click start.
 
+apt-get update && apt-get upgrade -y --force-yes
+apt-get install -y --force-yes git
+cd /usr/src
+git clone https://github.com/fusionpbx/fusionpbx-install.sh.git
+chmod 755 -R /usr/src/fusionpbx-install.sh
+cd /usr/src/fusionpbx-install.sh/debian
+./install.sh
+
+
+
+apt-get update && apt-get upgrade -y --force-yes
+apt-get install -y --force-yes git
+cd /usr/src
+git clone http://git.sip247.com/pbx/fusionpbx-sce-install.git
+chmod 755 -R /usr/src/fusionpbx-sce-install
+cd fusionpbx-sce-install/debian/
+
+Create a database password to use a good example is to execute the following:
+
+dd if=/dev/urandom bs=1 count=20 2>/dev/null | base64 | sed 's/[=\+//]//g'
+
+Edit the cluster.sh file on each server putting the same db password within the file:
+
+nano -w resources/cluster.sh
+
+#!/bin/sh
+########## Edit these values to suit and copy to second machine. Remember to set second machine to 'slave' ##########
+export master_ip='192.168.1.116'
+export slave_ip='192.168.1.110'
+# node_type must be either 'master' or 'slave'
+export node_type='master'
+#Fill in the database password on each node. Please change the one below to the one generated in the instructions.
+export database_password='4iaUT6sqPKSeRAMiPItELbBpBS8'
+#####################################################################################################################
+
+Change the masterand slave IPs, enter you DB password and do not forget on the slave to set the node_type to slave.
+
+Once that is done run the following:
+
+./install.sh
+
+For best results run on the master first and then the slave. This is not strictly necessary but we wnat BDR up and running on the master when we attempt to connect the second.
+
+
+
+
+
 For additional information to get started go to http://docs.fusionpbx.com/en/latest/getting_started.html 
 
 
