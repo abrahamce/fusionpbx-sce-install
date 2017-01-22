@@ -5,8 +5,7 @@ Just change one file and its almost as easy as a regular FusionPBX install
 
 ```
 apt-get update && apt-get upgrade -y --force-yes
-apt-get install -y --force-yes git
-apt-get install -y --force-yes sshpass
+apt-get install -y --force-yes git sshpass
 cd /usr/src
 git clone http://git.sip247.com/pbx/fusionpbx-sce-install.git
 chmod 755 -R /usr/src/fusionpbx-sce-install
