@@ -1,7 +1,7 @@
 fusionpbx-sce-install
 --------------------------------------
 The SCE stands for Simple Cluster Edition. This script will create a two server cluster with the minimum of input.
-Just change one file and its almost as easy as a regular FusionPBX install
+It is almost as easy as a regular FusionPBX install
 
 On the SLAVE node do the following
 
