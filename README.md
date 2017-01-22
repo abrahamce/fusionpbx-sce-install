@@ -44,7 +44,7 @@ nano -w resources/cluster.sh
 ./install.sh
 ```
 
-For best results run on the master first and then the slave. This is not strictly necessary but we wnat BDR up and running on the master when we attempt to connect the second.
+For best results run on the master first and then the slave. This is not strictly necessary but we want BDR up and running on the master when we attempt to connect the second.
 
 
 
