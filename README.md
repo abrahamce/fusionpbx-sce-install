@@ -12,7 +12,7 @@ chmod 755 -R /usr/src/fusionpbx-sce-install
 cd fusionpbx-sce-install/debian/
 ```
 
-Create a database password to use a good example is to execute the following:
+Create a database password to use. A good way is to execute the following:
 
 ```
 dd if=/dev/urandom bs=1 count=20 2>/dev/null | base64 | sed 's/[=\+//]//g'
