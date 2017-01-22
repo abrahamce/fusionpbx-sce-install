@@ -23,14 +23,14 @@ nano -w resources/cluster.sh
 ```
 
 <p>#!/bin/sh</p>
-########## Edit these values to suit and copy to second machine. Remember to set second machine to 'slave' ##########
-export master_ip='192.168.1.116'
-export slave_ip='192.168.1.110'
-## node_type must be either 'master' or 'slave'
-export node_type='master'
-#Fill in the database password on each node. Please change the one below to the one generated in the instructions.
-export database_password='4iaUT6sqPKSeRAMiPItELbBpBS8'
-#####################################################################################################################
+<p>########## Edit these values to suit and copy to second machine. Remember to set second machine to 'slave' ##########</p>
+<p>export master_ip='192.168.1.116'</p>
+<p>export slave_ip='192.168.1.110'</p>
+<p>## node_type must be either 'master' or 'slave'</p>
+<p>export node_type='master'</p>
+<p>#Fill in the database password on each node. Please change the one below to the one generated in the instructions.</p>
+<p>export database_password='4iaUT6sqPKSeRAMiPItELbBpBS8'</p>
+<p>#####################################################################################################################</p>
 
 Change the masterand slave IPs, enter you DB password and do not forget on the slave to set the node_type to slave.
 
