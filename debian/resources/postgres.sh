@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #includes
-. ./cluster.sh
+. ./resources/cluster.sh
 
 #send a message
 echo "Install PostgreSQL"
