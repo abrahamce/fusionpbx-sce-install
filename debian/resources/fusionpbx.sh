@@ -26,5 +26,7 @@ fi
 
 #get the source code
 git clone $BRANCH https://github.com/fusionpbx/fusionpbx.git /var/www/fusionpbx
+sed -i /var/www/fusionpbx/resources/templates/conf/autoload_configs/xml_rpc.conf.xml -e s:"name=\"auth-user\" value=\"freeswitch\":name=\"auth-realm\" value=\"$rpc_user\":"
+sed -i /var/www/fusionpbx/resources/templates/conf/autoload_configs/xml_rpc.conf.xml -e s:"name=\"auth-pass\" value=\"freeswitch\":name=\"auth-pass\" value=\"$rpc_pass\":"
 chown -R www-data:www-data /var/www/fusionpbx
 chmod -R 755 /var/www/fusionpbx/secure
