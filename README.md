@@ -26,7 +26,8 @@ chmod 755 -R /usr/src/fusionpbx-install.sh
 cd /usr/src/fusionpbx-install.sh/debian
 ./install.sh
 
-
+fusionpbx-sce-install
+--------------------------------------
 
 apt-get update && apt-get upgrade -y --force-yes
 apt-get install -y --force-yes git
