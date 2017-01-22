@@ -1,22 +1,54 @@
-fusionpbx-install.sh
+fusionpbx-sce-install
 --------------------------------------
+The SCE stands for Simple Cluster Edition. This script will create a two server cluster with the minimum of input.
+Just change one file and its almost as easy as a regular FusionPBX install
 
-This install script that has been designed to be an fast, simple, and modular way to to install FusionPBX. Start with a minimal install of Debian 8 with SSH enabled. Run the following commands under root. It installs FusionPBX, FreeSWITCH release package and its dependencies, IPTables, Fail2ban, NGINX, PHP FPM, and PostgresQL.
-
-```bash
-wget https://raw.githubusercontent.com/fusionpbx/fusionpbx-install.sh/master/install.sh -O install.sh && sh install.sh
+```
+apt-get update && apt-get upgrade -y --force-yes
+apt-get install -y --force-yes git sshpass
+cd /usr/src
+git clone http://git.sip247.com/pbx/fusionpbx-sce-install.git
+chmod 755 -R /usr/src/fusionpbx-sce-install
+cd fusionpbx-sce-install/debian/
 ```
 
-At the end of the install it will instruct you to go to the ip address of the server in your web browser to finish the install. It will also provide a random database password for you to use during the web based phase of the install. The install script builds the fusionpbx database so you will not need to use the create database username and password on the last page of the web based install.
+Create a database password to use. A good way is to execute the following:
 
-After you have completed the install you can login with the username and password you chose during the install. After you login go to them menu then Advanced -> Upgrade select the checkbox for App defaults. 
-
-```bash
-systemctl daemon-reload
-systemctl restart freeswitch
+```
+dd if=/dev/urandom bs=1 count=20 2>/dev/null | base64 | sed 's/[=\+//]//g'
 ```
 
-Then go to Status -> SIP Status and start the SIP profiles, after this, go to Advanced -> Modules and find the module Memcached and click start.
+Edit the cluster.sh file on each server putting the same db password within the file:
+
+```
+nano -w resources/cluster.sh
+```
+
+<p>#!/bin/sh</p>
+<p>########## Edit these values to suit and copy to second machine. Remember to set second machine to 'slave' ##########</p>
+<p>export master_ip='192.168.1.116'</p>
+<p>export slave_ip='192.168.1.110'</p>
+<p>## node_type must be either 'master' or 'slave'</p>
+<p>export node_type='master'</p>
+<p>#Fill in the database password on each node. Please change the one below to the one generated in the instructions.</p>
+<p>export database_password='4iaUT6sqPKSeRAMiPItELbBpBS8'</p>
+<p>#####################################################################################################################</p>
+
+
+
+<p>Change the master and slave IPs, enter you DB password and do not forget on the slave to set the node_type to slave.</p>
+
+<p>Once that is done run the following:</p>
+
+```
+./install.sh
+```
+
+For best results run on the master first and then the slave. This is not strictly necessary but we want BDR up and running on the master when we attempt to connect the second.
+
+
+
+
 
 For additional information to get started go to http://docs.fusionpbx.com/en/latest/getting_started.html 
 
