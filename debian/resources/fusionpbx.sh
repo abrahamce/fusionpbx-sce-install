@@ -29,7 +29,15 @@ fi
 
 #get the source code
 git clone $BRANCH https://github.com/fusionpbx/fusionpbx.git /var/www/fusionpbx
-sed -i /var/www/fusionpbx/resources/templates/conf/autoload_configs/xml_rpc.conf.xml -e s:"name=\"auth-user\" value=\"freeswitch\":name=\"auth-realm\" value=\"$rpc_user\":"
+cp /usr/src/fusionpbx-sce-install/debian/resources/ha_monitor.lua /var/www/fusionpbx/resources/install/scripts
+sed -i /var/www/fusionpbx/resources/install/scripts/ha_monitor.lua -e s:"rpc_user:$xml_cdr_username:"
+sed -i /var/www/fusionpbx/resources/install/scripts/ha_monitor.lua -e s:"rpc_pass:$xml_cdr_password:"
+if [ $node_type = 'master' ]; then
+    sed -i /var/www/fusionpbx/resources/install/scripts/ha_monitor.lua -e s:"rpc_ip:$slave_ip:"
+else
+    sed -i /var/www/fusionpbx/resources/install/scripts/ha_monitor.lua -e s:"rpc_ip:$master_ip:"
+fi
+sed -i /var/www/fusionpbx/resources/templates/conf/autoload_configs/xml_rpc.conf.xml -e s:"name=\"auth-user\" value=\"freeswitch\":name=\"auth-user\" value=\"$rpc_user\":"
 sed -i /var/www/fusionpbx/resources/templates/conf/autoload_configs/xml_rpc.conf.xml -e s:"name=\"auth-pass\" value=\"freeswitch\":name=\"auth-pass\" value=\"$rpc_pass\":"
 chown -R www-data:www-data /var/www/fusionpbx
 chmod -R 755 /var/www/fusionpbx/secure
