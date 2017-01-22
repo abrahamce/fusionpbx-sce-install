@@ -137,4 +137,6 @@ echo ""
 verbose "Installation has completed."
 echo ""
 echo "   Please obtain credentials from master node."
+echo ""
+echo ""
 fi
