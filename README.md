@@ -15,7 +15,7 @@ apt-get update && apt-get upgrade -y --force-yes
 apt-get install -y --force-yes git
 
 cd /usr/src
-git clone http://git.sip247.com/pbx/fusionpbx-sce-install.git
+git clone -b stable http://git.sip247.com/pbx/fusionpbx-sce-install.git
 
 chmod 755 -R /usr/src/fusionpbx-sce-install
 cd fusionpbx-sce-install/debian/
@@ -28,7 +28,7 @@ apt-get update && apt-get upgrade -y --force-yes
 apt-get install -y --force-yes git sshpass
 
 cd /usr/src
-git clone http://git.sip247.com/pbx/fusionpbx-sce-install.git
+git clone -b stable http://git.sip247.com/pbx/fusionpbx-sce-install.git
 
 chmod 755 -R /usr/src/fusionpbx-sce-install
 cd fusionpbx-sce-install/debian/
