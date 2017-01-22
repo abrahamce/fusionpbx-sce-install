@@ -56,4 +56,9 @@ service ssh restart
 
 For additional information to get started go to http://docs.fusionpbx.com/en/latest/getting_started.html 
 
+TODO
+Get memcache synching
+Add DSN to SIP profiles
+Edit autload_configs
+Sort out XML RPC
 
