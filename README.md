@@ -1,7 +1,10 @@
 fusionpbx-sce-install
 --------------------------------------
 The SCE stands for Simple Cluster Edition. This script will create a two server cluster with the minimum of input.
+
 It is almost as easy as a regular FusionPBX install
+
+If you are using PROXMOX with LXC container please complete the procedure at the bottom of the page first
 
 On the SLAVE node do the following
 
@@ -53,7 +56,15 @@ If you wish to disable root password authentication by SSH run the following:
 sed -i 's/^PermitRootLogin yes/PermitRootLogin without-password/g' /etc/ssh/sshd_config
 service ssh restart
 ```
+Debian on Proxmox LXC 
+If using Debian Jessie on Proxmox LXC containers please run the following BEFORE starting the FusionPBX install. 
 
+```apt-get update && apt-get upgrade
+apt-get install systemd
+apt-get install systemd-sysv
+apt-get install ca-certificates
+reboot
+```
 For additional information to get started go to http://docs.fusionpbx.com/en/latest/getting_started.html 
 
 TODO
