@@ -105,6 +105,15 @@ cd /var/www/fusionpbx && php /var/www/fusionpbx/core/upgrade/upgrade_domains.php
 /bin/systemctl daemon-reload
 /bin/systemctl restart freeswitch
 
+echo ""
+echo ""
+verbose "Cleaning up after install."
+echo ""
+/usr/bin/fs_cli -x "memcache flush"
+/bin/systemctl stop freeswitch
+rm /var/lib/freeswitch/db/*
+/bin/systemctl start freeswitch
+
 #welcome message
 if [ $node_type = 'master' ]; then
 echo ""
