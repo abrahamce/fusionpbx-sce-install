@@ -372,6 +372,6 @@
                 <param name="registration-thread-frequency" value="30"  enabled="false"/>
                 <param name="nat-options-ping" value="true" enabled="false"/>
                 <param name="dsn_system" value="dsn_system_placeholder" enabled="true"/>
-                <param name="dsn_switch" value="dsn_switch_placeholder" enabled="true"/>
+                <param name="dsn" value="dsn_switch_placeholder" enabled="true"/>
         </settings>
 </profile>
