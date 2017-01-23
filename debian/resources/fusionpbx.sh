@@ -37,6 +37,10 @@ cp /usr/src/fusionpbx-sce-install/debian/resources/internal.xml.noload /var/www/
 cp /usr/src/fusionpbx-sce-install/debian/resources/internal-ipv6.xml.noload /var/www/fusionpbx/resources/templates/conf/sip_profiles/internal-ipv6.xml.noload
 cp /usr/src/fusionpbx-sce-install/debian/resources/external.xml.noload /var/www/fusionpbx/resources/templates/conf/sip_profiles/external.xml.noload
 cp /usr/src/fusionpbx-sce-install/debian/resources/external-ipv6.xml.noload /var/www/fusionpbx/resources/templates/conf/sip_profiles/external-ipv6.xml.noload
+cp /usr/src/fusionpbx-sce-install/debian/resources/callcenter.conf /var/www/fusionpbx/resources/templates/conf/autoload_configs/callcenter.conf
+cp /usr/src/fusionpbx-sce-install/debian/resources/db.conf.xml /var/www/fusionpbx/resources/templates/conf/autoload_configs/db.conf.xml
+cp /usr/src/fusionpbx-sce-install/debian/resources/fifo.conf.xml /var/www/fusionpbx/resources/templates/conf/autoload_configs/fifo.conf.xml
+
 sed -i /var/www/fusionpbx/resources/templates/conf/sip_profiles/internal.xml.noload -e s:"dsn_system_placeholder:pgsql\://hostaddr=127.0.0.1 port=5432 dbname=fusionpbx user=fusionpbx password=$database_password options='' application_name='fusionpbx':"
 sed -i /var/www/fusionpbx/resources/templates/conf/sip_profiles/internal.xml.noload -e s:"dsn_switch_placeholder:pgsql\://hostaddr=127.0.0.1 port=5432 dbname=freeswitch user=freeswitch password=$database_password options='' application_name='freeswitch':"
 sed -i /var/www/fusionpbx/resources/templates/conf/sip_profiles/internal-ipv6.xml.noload -e s:"dsn_system_placeholder:pgsql\://hostaddr=127.0.0.1 port=5432 dbname=fusionpbx user=fusionpbx password=$database_password options='' application_name='fusionpbx':"
