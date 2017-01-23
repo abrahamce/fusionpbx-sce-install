@@ -64,7 +64,7 @@ Add DSN to SIP profiles
 
 Edit autload_configs
 
-Sort out XML RPC
+~~Sort out XML RPC~~ Done
 
 Turn off auto create schemas
 
