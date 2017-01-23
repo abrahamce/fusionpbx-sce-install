@@ -49,7 +49,7 @@
     -->
     <!--<param name="startup-script" value="app/voicemail/resources/scripts/mwi.lua"/>-->
     <!--<param name="startup-script" value="app/voicemail/resources/scripts/mwi_subscribe.lua"/>-->
-    <param name="startup-script" value="app/voicemail/resources/scripts/ha_monitor.lua"/>
+    <param name="startup-script" value="ha_monitor.lua"/>
 
   </settings>
 </configuration>
