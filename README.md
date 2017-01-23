@@ -58,7 +58,7 @@ For additional information to get started go to http://docs.fusionpbx.com/en/lat
 
 TODO
 
-Get memcache synching
+~~Get memcache synching~~ Done
 
 Add DSN to SIP profiles
 
