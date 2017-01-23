@@ -30,6 +30,7 @@ fi
 #get the source code
 git clone $BRANCH https://github.com/fusionpbx/fusionpbx.git /var/www/fusionpbx
 cp /usr/src/fusionpbx-sce-install/debian/resources/ha_monitor.lua /var/www/fusionpbx/resources/install/scripts
+cp /usr/src/fusionpbx-sce-install/debian/resources/lua.conf.xml /var/www/fusionpbx/resources/templates/conf/autoload_configs/lua.conf.xml
 sed -i /var/www/fusionpbx/resources/install/scripts/ha_monitor.lua -e s:"rpc_user:$xml_cdr_username:"
 sed -i /var/www/fusionpbx/resources/install/scripts/ha_monitor.lua -e s:"rpc_pass:$xml_cdr_password:"
 if [ $node_type = 'master' ]; then
