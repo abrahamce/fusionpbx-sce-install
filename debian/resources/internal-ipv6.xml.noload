@@ -139,7 +139,7 @@
 		<param name="disable-srv" value="false" enabled="false"/>
 		<param name="disable-naptr" value="false" enabled="false"/>
         <param name="dsn_system" value="dsn_system_placeholder" enabled="true"/>
-        <param name="dsn_switch" value="dsn_switch_placeholder" enabled="true"/>
+        <param name="dsn" value="dsn_switch_placeholder" enabled="true"/>
 
 	</settings>
 </profile>
