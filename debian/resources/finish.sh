@@ -159,5 +159,5 @@ echo "   Additional information."
 echo "      https://fusionpbx.com/support.php"
 echo "      https://www.fusionpbx.com"
 echo "      http://docs.fusionpbx.com"
-echo "
+echo ""
 fi
