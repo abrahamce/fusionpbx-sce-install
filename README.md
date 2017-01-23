@@ -5,7 +5,9 @@ The SCE stands for Simple Cluster Edition. This script will create a two server 
 It is almost as easy as a regular FusionPBX install
 
 
-**If you are using PROXMOX with LXC container please complete the procedure at the bottom of the page first**
+
+**If you are using PROXMOX with LXC containers please complete the procedure at the bottom of the page first**
+
 
 
 On the SLAVE node do the following
