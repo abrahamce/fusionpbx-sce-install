@@ -34,8 +34,17 @@ cp /usr/src/fusionpbx-sce-install/debian/resources/lua.conf.xml /var/www/fusionp
 cp /usr/src/fusionpbx-sce-install/debian/resources/modules.conf.xml /var/www/fusionpbx/resources/templates/conf/autoload_configs/modules.conf.xml
 cp /usr/src/fusionpbx-sce-install/debian/resources/modules.php /var/www/fusionpbx/app/modules/resources/classes/modules.php
 cp /usr/src/fusionpbx-sce-install/debian/resources/internal.xml.noload /var/www/fusionpbx/resources/templates/conf/sip_profiles/internal.xml.noload
+cp /usr/src/fusionpbx-sce-install/debian/resources/internal-ipv6.xml.noload /var/www/fusionpbx/resources/templates/conf/sip_profiles/internal-ipv6.xml.noload
+cp /usr/src/fusionpbx-sce-install/debian/resources/external.xml.noload /var/www/fusionpbx/resources/templates/conf/sip_profiles/external.xml.noload
+cp /usr/src/fusionpbx-sce-install/debian/resources/external-ipv6.xml.noload /var/www/fusionpbx/resources/templates/conf/sip_profiles/external-ipv6.xml.noload
 sed -i /var/www/fusionpbx/resources/templates/conf/sip_profiles/internal.xml.noload -e s:"dsn_system_placeholder:pgsql\://hostaddr=127.0.0.1 port=5432 dbname=fusionpbx user=fusionpbx password=$database_password options='' application_name='fusionpbx':"
 sed -i /var/www/fusionpbx/resources/templates/conf/sip_profiles/internal.xml.noload -e s:"dsn_switch_placeholder:pgsql\://hostaddr=127.0.0.1 port=5432 dbname=freeswitch user=freeswitch password=$database_password options='' application_name='freeswitch':"
+sed -i /var/www/fusionpbx/resources/templates/conf/sip_profiles/internal-ipv6.xml.noload -e s:"dsn_system_placeholder:pgsql\://hostaddr=127.0.0.1 port=5432 dbname=fusionpbx user=fusionpbx password=$database_password options='' application_name='fusionpbx':"
+sed -i /var/www/fusionpbx/resources/templates/conf/sip_profiles/internal-ipv6.xml.noload -e s:"dsn_switch_placeholder:pgsql\://hostaddr=127.0.0.1 port=5432 dbname=freeswitch user=freeswitch password=$database_password options='' application_name='freeswitch':"
+sed -i /var/www/fusionpbx/resources/templates/conf/sip_profiles/external.xml.noload -e s:"dsn_system_placeholder:pgsql\://hostaddr=127.0.0.1 port=5432 dbname=fusionpbx user=fusionpbx password=$database_password options='' application_name='fusionpbx':"
+sed -i /var/www/fusionpbx/resources/templates/conf/sip_profiles/external.xml.noload -e s:"dsn_switch_placeholder:pgsql\://hostaddr=127.0.0.1 port=5432 dbname=freeswitch user=freeswitch password=$database_password options='' application_name='freeswitch':"
+sed -i /var/www/fusionpbx/resources/templates/conf/sip_profiles/external-ipv6.xml.noload -e s:"dsn_system_placeholder:pgsql\://hostaddr=127.0.0.1 port=5432 dbname=fusionpbx user=fusionpbx password=$database_password options='' application_name='fusionpbx':"
+sed -i /var/www/fusionpbx/resources/templates/conf/sip_profiles/external-ipv6.xml.noload -e s:"dsn_switch_placeholder:pgsql\://hostaddr=127.0.0.1 port=5432 dbname=freeswitch user=freeswitch password=$database_password options='' application_name='freeswitch':"
 sed -i /var/www/fusionpbx/resources/install/scripts/ha_monitor.lua -e s:"rpc_user:$xml_cdr_username:"
 sed -i /var/www/fusionpbx/resources/install/scripts/ha_monitor.lua -e s:"rpc_pass:$xml_cdr_password:"
 if [ $node_type = 'master' ]; then
