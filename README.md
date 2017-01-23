@@ -43,7 +43,7 @@ You will be informed when installation is completed, once that is done, return t
 
 ```
 cd /usr/src/fusionpbx-sce-install/debian
-./installer.sh
+./install.sh
 ```
 
 You will be informed on screen when the installation is completed.
@@ -58,14 +58,17 @@ For additional information to get started go to http://docs.fusionpbx.com/en/lat
 
 TODO
 
-Get memcache synching
+~~Get memcache synching~~ Done
 
 Add DSN to SIP profiles
 
 Edit autload_configs
 
-Sort out XML RPC
+~~Sort out XML RPC~~ Done
 
 Turn off auto create schemas
+
+Install Csync2 for file replication
+
 
 
