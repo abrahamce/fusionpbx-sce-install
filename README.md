@@ -78,15 +78,15 @@ For additional information to get started go to http://docs.fusionpbx.com/en/lat
 
 TODO
 
-~~Get memcache synching~~ Done
+~~Get memcache synching~~ - Done
 
-Add DSN to SIP profiles
+~~Add DSN to SIP profiles~~ - Done
 
-Edit autload_configs
+~~Edit autload_configs~~ - Done
 
-~~Sort out XML RPC~~ Done
+~~Sort out XML RPC~~ - Done
 
-Turn off auto create schemas
+~~Turn off auto create schemas~~ - Done
 
 Install Csync2 for file replication
 
