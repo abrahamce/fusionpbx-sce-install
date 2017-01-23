@@ -66,7 +66,8 @@ service ssh restart
 If using Debian Jessie on Proxmox LXC containers please run the following BEFORE starting the FusionPBX install. 
 
 
-```apt-get update && apt-get upgrade
+```
+apt-get update && apt-get upgrade
 apt-get install systemd
 apt-get install systemd-sysv
 apt-get install ca-certificates
