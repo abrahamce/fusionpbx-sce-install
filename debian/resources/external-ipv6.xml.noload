@@ -93,6 +93,6 @@
 		<!--If you have ODBC support and a working dsn you can use it instead of SQLite-->
 		<param name="odbc-dsn" value="$${dsn}" enabled="false"/>
         <param name="dsn_system" value="dsn_system_placeholder" enabled="true"/>
-        <param name="dsn_switch" value="dsn_switch_placeholder" enabled="true"/>		
+        <param name="dsn" value="dsn_switch_placeholder" enabled="true"/>		
 	</settings>
 </profile>
