@@ -60,6 +60,7 @@ If you wish to disable root password authentication by SSH run the following:
 sed -i 's/^PermitRootLogin yes/PermitRootLogin without-password/g' /etc/ssh/sshd_config
 service ssh restart
 ```
+
 **Debian on Proxmox LXC**
 
 If using Debian Jessie on Proxmox LXC containers please run the following BEFORE starting the FusionPBX install. 
@@ -71,6 +72,7 @@ apt-get install systemd-sysv
 apt-get install ca-certificates
 reboot
 ```
+
 For additional information to get started go to http://docs.fusionpbx.com/en/latest/getting_started.html 
 
 TODO
