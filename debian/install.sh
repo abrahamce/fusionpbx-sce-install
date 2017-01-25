@@ -22,9 +22,9 @@ database_password=$(dd if=/dev/urandom bs=1 count=20 2>/dev/null | base64 | sed 
 xml_cdr_username=$(dd if=/dev/urandom bs=1 count=12 2>/dev/null | base64 | sed 's/[=\+//]//g')
 xml_cdr_password=$(dd if=/dev/urandom bs=1 count=12 2>/dev/null | base64 | sed 's/[=\+//]//g')
 echo 1>&2 "Writing local cluster file"
-echo "export master_ip='$master_ip'\nexport slave_ip='$slave_ip'\nexport node_type='master'\nexport database_password='$database_password'\nexport xml_cdr_username='$xml_cdr_username'\nexport xml_cdr_password='$xml_cdr_password'\n" > /usr/src/fusionpbx-sce-install/debian/resources/cluster.sh
+printf "export master_ip='$master_ip'\nexport slave_ip='$slave_ip'\nexport node_type='master'\nexport database_password='$database_password'\nexport xml_cdr_username='$xml_cdr_username'\nexport xml_cdr_password='$xml_cdr_password'\n" > /usr/src/fusionpbx-sce-install/debian/resources/cluster.sh
 echo 1>&2 "Writing remote cluster file"
-echo "export master_ip='$master_ip'\nexport slave_ip='$slave_ip'\nexport node_type='slave'\nexport database_password='$database_password'\nexport xml_cdr_username='$xml_cdr_username'\nexport xml_cdr_password='$xml_cdr_password'\n" | ssh root@$slave_ip 'cat > /usr/src/fusionpbx-sce-install/debian/resources/cluster.sh'
+printf "export master_ip='$master_ip'\nexport slave_ip='$slave_ip'\nexport node_type='slave'\nexport database_password='$database_password'\nexport xml_cdr_username='$xml_cdr_username'\nexport xml_cdr_password='$xml_cdr_password'\n" | ssh root@$slave_ip 'cat > /usr/src/fusionpbx-sce-install/debian/resources/cluster.sh'
 fi
 . ./resources/cluster.sh
 echo ""
