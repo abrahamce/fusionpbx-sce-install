@@ -29,7 +29,7 @@ echo 'deb http://packages.2ndquadrant.com/bdr/apt/ jessie-2ndquadrant main' >> /
 apt-get update && apt-get upgrade -y
 apt-get install -y --force-yes sudo postgresql-bdr-9.4 postgresql-bdr-9.4-bdr-plugin postgresql-bdr-contrib-9.4
 
-cp /usr/src/fusionpbx-sce-install/debian/resources/postgresql.conf /etc/postgresql/9.4/main/postgresql.conf
+cat /usr/src/fusionpbx-sce-install/debian/resources/postgresql.conf >> /etc/postgresql/9.4/main/postgresql.conf
 chown postgres:postgres /etc/postgresql/9.4/main/postgresql.conf
 
 #systemd
