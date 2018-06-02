@@ -1,4 +1,4 @@
-fusionpbx-sce-install
+fusionpbx-sce-install 4.2 version ( with mods. use at own risk)
 --------------------------------------
 The SCE stands for Simple Cluster Edition. This script will create a two server cluster with the minimum of input.
 
