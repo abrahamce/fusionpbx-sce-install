@@ -23,8 +23,8 @@ apt-get install -y --force-yes git
 
 cd /usr/src
 git clone -b stable  https://github.com/abrahamce/fusion4.2.git
-chmod 755 -R /usr/src/fusionpbx-sce-install
-cd fusionpbx-sce-install/debian/
+chmod 755 -R /usr/src/fusion4.2.git
+cd fusion4.2.git/debian/
 ```
 Now move to the MASTER node and do the following:
 
@@ -36,8 +36,8 @@ apt-get install -y --force-yes git sshpass
 cd /usr/src
 git clone -b stable  https://github.com/abrahamce/fusion4.2.git
 
-chmod 755 -R /usr/src/fusionpbx-sce-install
-cd fusionpbx-sce-install/debian/
+chmod 755 -R /usr/src/fusion4.2.git
+cd fusion4.2.git/debian/
 ```
 
 Run the following and follow the instructions onscreen:
@@ -48,7 +48,7 @@ Run the following and follow the instructions onscreen:
 You will be informed when installation is completed, once that is done, return to the SLAVE node and run:
 
 ```
-cd /usr/src/fusionpbx-sce-install/debian
+cd /usr/src/fusion4.2.git/debian
 ./install.sh
 ```
 
