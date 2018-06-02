@@ -23,7 +23,7 @@ apt-get install -y --force-yes git
 
 cd /usr/src
 git clone -b stable  https://github.com/abrahamce/fusionpbx-sce-install.git
-chmod 755 -R /usr/src/fusion4.2
+chmod 755 -R /usr/src/fusionpbx-sce-install
 cd fusionpbx-sce-install/debian/
 ```
 Now move to the MASTER node and do the following:
