@@ -23,8 +23,8 @@ apt-get install -y --force-yes git
 
 cd /usr/src
 git clone -b stable  https://github.com/abrahamce/fusion4.2.git
-chmod 755 -R /usr/src/fusion4.2.git
-cd fusion4.2.git/debian/
+chmod 755 -R /usr/src/fusion4.2
+cd fusion4.2/debian/
 ```
 Now move to the MASTER node and do the following:
 
