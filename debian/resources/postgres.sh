@@ -5,6 +5,7 @@
 
 #send a message
 echo "Install PostgreSQL"
+sudo service postgresql start
 
 #generate a random password
 password=$(dd if=/dev/urandom bs=1 count=20 2>/dev/null | base64)
@@ -35,6 +36,7 @@ chown postgres:postgres /etc/postgresql/9.4/main/postgresql.conf
 #systemd
 systemctl daemon-reload
 systemctl restart postgresql
+sudo service postgresql restart
 
 #init.d
 #/usr/sbin/service postgresql restart
