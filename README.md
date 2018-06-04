@@ -89,5 +89,7 @@ TODO
 
 Install Csync2 for file replication
 
+Upgrade to fusion 4.5
+
 
 
