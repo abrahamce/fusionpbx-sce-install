@@ -19,7 +19,7 @@ sed -i 's/^PermitRootLogin .*/PermitRootLogin yes/g' /etc/ssh/sshd_config
 service ssh restart
 apt-get update && apt-get upgrade -y --force-yes
 
-apt-get install -y --force-yes git
+apt-get install -y --force-yes git sshpass
 
 cd /usr/src
 git clone -b stable  https://github.com/abrahamce/fusionpbx-sce-install.git
