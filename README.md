@@ -91,5 +91,31 @@ Install Csync2 for file replication
 
 Upgrade to fusion 4.5
 
+sudo service postgresql start
+
+sudo -u postgres psql -c "CREATE DATABASE fusionpbx";
+sudo -u postgres psql -c "CREATE DATABASE freeswitch";
+sudo -u postgres psql -c "CREATE ROLE fusionpbx WITH SUPERUSER LOGIN PASSWORD '$password';"
+sudo -u postgres psql -c "CREATE ROLE freeswitch WITH SUPERUSER LOGIN PASSWORD '$password';"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE fusionpbx to fusionpbx;"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE freeswitch to fusionpbx;"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE freeswitch to freeswitch;"
+sudo -u postgres psql fusionpbx -c "CREATE EXTENSION btree_gist";
+sudo -u postgres psql fusionpbx -c "CREATE EXTENSION pgcrypto";
+sudo -u postgres psql freeswitch -c "CREATE EXTENSION btree_gist";
+sudo -u postgres psql freeswitch -c "CREATE EXTENSION pgcrypto";
+sudo -u postgres psql freeswitch < /usr/src/fusionpbx-sce-install/debian/resources/freeswitch.sql;
+
+cd /var/www/fusionpbx && php /var/www/fusionpbx/core/upgrade/upgrade_schema.php
+
+
+su postgres
+psql
+\c fusionpbx
+update v_usersupdate v_users set password = '67a1e09bb1f83f5007dc119c14d663aa', salt = 'salt' where       username = 'admin';
+
+
+
+
 
 
