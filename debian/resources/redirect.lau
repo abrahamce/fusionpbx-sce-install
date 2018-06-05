@@ -1,0 +1,15 @@
+destination_number = session:getVariable("destination_number");
+dialed_domain = session:getVariable("domain_name");
+command = "/usr/bin/fs_cli -H X.X.X.X -P 8021 -p ClueCon -x \"sofia_contact "..destination_number.."@"..dialed_domain.."\""
+freeswitch.consoleLog("info",command)
+local handle = io.popen(command)
+local result = handle:read("*a")
+result = string.gsub(result,"\n","")
+print(result)
+if result ~= "error/user_not_registered" then
+	if session then
+		freeswitch.consoleLog("INFO", "Lets send a redirect for other server")
+		session:execute("redirect", "sip:"..destination_number.."@X.X.X.X:5080")
+    	end
+end
+handle:close()
