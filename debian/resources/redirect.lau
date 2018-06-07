@@ -1,15 +1,41 @@
+--destination_number = session:getVariable("destination_number");
+--dialed_domain = session:getVariable("domain_name");
+--command = "/usr/bin/fs_cli -H 103.92.92.3 -P 8021 -p ClueCon -x \"sofia_contact "..destination_number.."@"..dialed_domain.."\""
+--freeswitch.consoleLog("info",command)
+--local handle = io.popen(command)
+--local result = handle:read("*a")
+--result = string.gsub(result,"\n","")
+--if result ~= "error/user_not_registered" then
+--        if session then
+--                freeswitch.consoleLog("INFO", "Lets send a redirect for other server")
+--                session:execute("redirect", "sip:"..destination_number.."@103.92.92.3:5080")
+--		session:hangup();
+--        end
+--end
+--handle:close()
 destination_number = session:getVariable("destination_number");
 dialed_domain = session:getVariable("domain_name");
-command = "/usr/bin/fs_cli -H X.X.X.X -P 8021 -p ClueCon -x \"sofia_contact "..destination_number.."@"..dialed_domain.."\""
-freeswitch.consoleLog("info",command)
+command = "/usr/bin/fs_cli -H 103.92.92.3 -P 8021 -p ClueCon -x \"show registrations\""
 local handle = io.popen(command)
 local result = handle:read("*a")
-result = string.gsub(result,"\n","")
-print(result)
-if result ~= "error/user_not_registered" then
-	if session then
-		freeswitch.consoleLog("INFO", "Lets send a redirect for other server")
-		session:execute("redirect", "sip:"..destination_number.."@X.X.X.X:5080")
-    	end
+freeswitch.consoleLog("INFO", command)
+i = 1
+for main_string in string.gmatch(result, "([^\n]+)") do
+        if i ~= 1 then
+                for search_extension in string.gmatch(main_string, "([^,]+)") do
+                        if search_extension == destination_number then
+                                for search_domain in string.gmatch(main_string, "([^,]+)") do
+                                        if search_domain == dialed_domain then
+                                                freeswitch.consoleLog("INFO", "Extension is registered on other server")
+                                                freeswitch.consoleLog("INFO", "Lets send a redirect for other server")
+                                                session:execute("redirect", "sip:"..destination_number.."@103.92.92.3:5080")
+                                                session:hangup()
+                                        end
+                                end
+                        end
+
+                end
+        end
+        i = i + 1
 end
 handle:close()
