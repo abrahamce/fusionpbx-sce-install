@@ -112,8 +112,7 @@ cd /var/www/fusionpbx && php /var/www/fusionpbx/core/upgrade/upgrade_schema.php
 su postgres
 psql
 \c fusionpbx
-update v_usersupdate v_users set password = '67a1e09bb1f83f5007dc119c14d663aa', salt = 'salt' where       username = 'admin';
-
+update v_users set password = '67a1e09bb1f83f5007dc119c14d663aa', salt = 'salt' where username = 'admin';
 
 
 
